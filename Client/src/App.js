@@ -23,44 +23,6 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 
 class App extends React.Component {
   componentDidMount() {
-    // Testimonial
-    $(document).ready(function () {
-      var owl = $(".owl-carousel");
-      owl.owlCarousel({
-        nav: true,
-        navText: [
-          "<i className='fa-solid fa-circle-chevron-left'></i>",
-          "<i className='fa-solid fa-circle-chevron-right'></i>",
-        ],
-        center: true,
-        margin: 10,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: true,
-            loop: true,
-          },
-          576: {
-            items: 1,
-            nav: true,
-            loop: true,
-          },
-          768: {
-            items: 2,
-            nav: true,
-            loop: true,
-          },
-          1000: {
-            items: 2,
-            nav: true,
-            loop: true,
-          },
-        },
-      });
-      owl.trigger("to.owl.carousel", 1);
-    });
-
     // Scrolling
     $("#ourservice").click(function () {
       $("html, body").animate(
