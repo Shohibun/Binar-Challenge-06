@@ -1,0 +1,2 @@
+ClientID = 512358058842-irha8guanrdttm8fjc7mpvhmjlbjg23t.apps.googleusercontent.com
+ClinetSecret = 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
