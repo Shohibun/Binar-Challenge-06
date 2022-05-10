@@ -1,6 +1,9 @@
 import React from "react";
+import useCollapse from 'react-collapsed';
 
 export default function FaqUser() {
+  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+
     return (
         <div className="container mt-5 pt-5" id="fq">
         <div className="row">
@@ -18,15 +21,15 @@ export default function FaqUser() {
                     <div className="card mb-3">
                         <div className="card-header" id="headingOne">
                           <h5 className="mb-0">
-                            <button className="btn btn-light collapsed w-100" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button className="btn btn-light w-100" {...getToggleProps()}>
                                 <span className="float-left custom-user-font">
-                                    Apa saja syarat yang dibutuhkan?
+                                  {isExpanded ? "Apa saja syarat yang dibutuhkan?" : "Apa saja syarat yang dibutuhkan?"}
                                 </span> 
                                 <span className="float-right"><img src={require("../images/fi_chevron-down.png")} alt="Down"/></span>
                             </button>
                           </h5>
                         </div>
-                        <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div {...getCollapseProps()}>
                           <div className="card-body custom-user-font">
                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, asperiores.
                           </div>
@@ -34,17 +37,17 @@ export default function FaqUser() {
                     </div>
 
                     <div className="card mb-3">
-                      <div className="card-header" id="headingTwo">
-                        <h5 className="mb-0">
-                          <button className="btn btn-light collapsed w-100" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <div className="card-header" id="headingOne">
+                          <h5 className="mb-0">
+                            <button className="btn btn-light w-100" {...getToggleProps()}>
                             <span className="float-left custom-user-font">
-                                Berapa hari minimal sewa mobil lepas kunci?
+                            {isExpanded ? "Berapa hari minimal sewa mobil lepas kunci?" : "Berapa hari minimal sewa mobil lepas kunci?"}
                             </span>
                             <span className="float-right"><img src={require("../images/fi_chevron-down-1.png")} alt="Down"/></span>
                           </button>
                         </h5>
                       </div>
-                      <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div {...getCollapseProps()}>
                         <div className="card-body custom-user-font">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, asperiores.
                         </div>
@@ -52,17 +55,17 @@ export default function FaqUser() {
                     </div>
 
                     <div className="card mb-3">
-                      <div className="card-header" id="headingThree">
-                        <h5 className="mb-0">
-                          <button className="btn btn-light collapsed w-100" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <div className="card-header" id="headingOne">
+                          <h5 className="mb-0">
+                            <button className="btn btn-light w-100" {...getToggleProps()}>
                             <span className="float-left custom-user-font">
-                                Berapa hari sebelumnya sabaiknya booking sewa mobil?
+                            {isExpanded ? "Berapa hari sebelumnya sabaiknya booking sewa mobil?" : "Berapa hari sebelumnya sabaiknya booking sewa mobil?"}
                             </span>
                             <span className="float-right"><img src={require("../images/fi_chevron-down-2.png")} alt="Down"/></span>
                           </button>
                         </h5>
                       </div>
-                      <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div {...getCollapseProps()}>
                         <div className="card-body custom-user-font">
                           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas, hic!
                         </div>
@@ -70,17 +73,17 @@ export default function FaqUser() {
                     </div>
 
                     <div className="card mb-3">
-                        <div className="card-header" id="headingFour">
+                        <div className="card-header" id="headingOne">
                           <h5 className="mb-0">
-                            <button className="btn btn-light collapsed w-100" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <button className="btn btn-light w-100" {...getToggleProps()}>
                                 <span className="float-left custom-user-font">
-                                    Apakah Ada biaya antar-jemput?
+                                {isExpanded ? "Apakah Ada biaya antar-jemput?" : "Apakah Ada biaya antar-jemput?"}
                                 </span>
                                 <span className="float-right"><img src={require("../images/fi_chevron-down-3.png")} alt="Down"/></span>
                             </button>
                           </h5>
                         </div>
-                        <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div {...getCollapseProps()}>
                           <div className="card-body custom-user-font">
                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, asperiores.
                           </div>
@@ -88,17 +91,17 @@ export default function FaqUser() {
                     </div>
 
                     <div className="card mb-3">
-                        <div className="card-header" id="headingFive">
+                        <div className="card-header" id="headingOne">
                           <h5 className="mb-0">
-                            <button className="btn btn-light collapsed w-100" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <button className="btn btn-light w-100" {...getToggleProps()}>
                                 <span className="float-left custom-user-font">
-                                    Bagaimana jika terjadi kecelakaan?
+                                {isExpanded ? "Bagaimana jika terjadi kecelakaan?" : " Bagaimana jika terjadi kecelakaan?"}
                                 </span>
                                 <span className="float-right"><img src={require("../images/fi_chevron-down-4.png")} alt="Down"/></span>
                             </button>
                           </h5>
                         </div>
-                        <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                        <div {...getCollapseProps()}>
                           <div className="card-body custom-user-font">
                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, asperiores.
                           </div>
