@@ -5,14 +5,14 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
-} from './types';
+} from "./types";
 
 // 9. Proses AuthService ke folder service
-import AuthService from '../services/auth.service';
+import AuthService from "../services/auth.service";
 
 // Proses action register ke-1, koneksi API (AuthService)
-export const register = (email, password) => (dispatch) => {
-  return AuthService.register(email, password).then(
+export const register = (username, email, password) => (dispatch) => {
+  return AuthService.register(username, email, password).then(
     (response) => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -47,8 +47,8 @@ export const register = (email, password) => (dispatch) => {
   );
 };
 
-export const login = (email, password) => (dispatch) => {
-  return AuthService.login(email, password).then(
+export const login = (username, password) => (dispatch) => {
+  return AuthService.login(username, password).then(
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,

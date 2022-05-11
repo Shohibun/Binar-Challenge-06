@@ -19,6 +19,16 @@ const required = (value) => {
   }
 };
 
+const validUsername = (value) => {
+  if (value.length < 3 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The username must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
 const validEmail = (value) => {
   if (!isEmail(value)) {
     return (
@@ -36,7 +46,7 @@ const validPassword = (value) => {
     return (
       <div className="mt-2">
         <div className="alert alert-danger mx-auto" role="alert">
-          Password shoud have 6 to 40 characters.
+          The password must be between 6 and 40 characters.
         </div>
       </div>
     );
@@ -44,15 +54,24 @@ const validPassword = (value) => {
 };
 
 export default function SignUp() {
-  const form = useRef();
+  // const form = useRef();
   const checkBtn = useRef();
 
+  const [username, setUsername] = useState("");
+  console.log("username:", username)
   const [email, setEmail] = useState("");
+  console.log("email:", email)
   const [password, setPassword] = useState("");
+  console.log("password:", password)
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
+
+  const onChangeUsername = (element) => {
+    const username = element.target.value;
+    setUsername(username);
+  }
 
   const onChangeEmail = (element) => {
     const email = element.target.value;
@@ -69,10 +88,10 @@ export default function SignUp() {
 
     setSuccessful(false);
 
-    form.current.validateAll();
+    // form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(email, password))
+      dispatch(register(username, email, password))
         .then(() => {
           setSuccessful(true);
         })
@@ -97,6 +116,24 @@ export default function SignUp() {
               <Form onSubmit={handleRegister}>
                 {!successful && (
                   <>
+                  <div className="form-group mb-3">
+                      <label
+                        htmlFor="username"
+                        className="text-dark mb-1 custom-auth-font"
+                      >
+                        Username
+                      </label>
+                      <Input
+                        type="text"
+                        className="form-control p-2 custom-auth-font"
+                        name="username"
+                        value={username}
+                        onChange={onChangeUsername}
+                        validations={[required, validUsername]}
+                        placeholder="Contoh: johndee"
+                      />
+                    </div>
+
                     <div className="form-group mb-3">
                       <label
                         htmlFor="email"
