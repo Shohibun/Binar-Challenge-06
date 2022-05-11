@@ -21,15 +21,15 @@ export default function SignUp() {
               <form action="/dasboard-user">
                 <div className="form-group mb-3">
                   <label
-                    for="username"
+                    htmlFor="email"
                     className="text-dark mb-1 custom-auth-font"
                   >
                     Email
                   </label>
                   <input
                     type="text"
-                    id="username"
-                    name="username"
+                    id="email"
+                    name="email"
                     className="form-control p-2 custom-auth-font"
                     placeholder="Contoh: johndee@gmail.com"
                   />
@@ -37,7 +37,7 @@ export default function SignUp() {
 
                 <div className="form-group">
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="text-dark mb-1 custom-auth-font"
                   >
                     Password

@@ -6,13 +6,14 @@
 
 .custom-auth-delete-spacing {
     background-image: url('../images/image 2.png');
+    padding: 0;
 }
 
 .custom-auth-transperency {
     background-color: #0D28A6;
     height: 100vh;
     width: 100%;
-    margin: 0 0 0 15px;
+    margin: 0 0 0 0px;
     opacity: 0.3;
 }
 

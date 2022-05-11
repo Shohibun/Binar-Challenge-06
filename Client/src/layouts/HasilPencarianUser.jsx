@@ -5,7 +5,7 @@ import Jumbotron from "../components/JumbotronMobilUser";
 import Footer from "../components/Footer";
 import Content from "../pages/HasilPencarianUser";
 
-export default function Layouts() {
+export default function HasilPencarianUser() {
     return (
         <>
         <Opacity />

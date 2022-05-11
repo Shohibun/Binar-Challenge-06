@@ -54,15 +54,12 @@ const validPassword = (value) => {
 };
 
 export default function SignUp() {
-  // const form = useRef();
+  const form = useRef();
   const checkBtn = useRef();
 
   const [username, setUsername] = useState("");
-  console.log("username:", username)
   const [email, setEmail] = useState("");
-  console.log("email:", email)
   const [password, setPassword] = useState("");
-  console.log("password:", password)
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state) => state.message);
@@ -88,7 +85,7 @@ export default function SignUp() {
 
     setSuccessful(false);
 
-    // form.current.validateAll();
+    form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(register(username, email, password))
@@ -113,7 +110,7 @@ export default function SignUp() {
               <div className="mb-4 custom-auth-logo"></div>
               <h4 className="font-weight-bold mb-4">Create New Account</h4>
 
-              <Form onSubmit={handleRegister}>
+              <Form onSubmit={handleRegister} ref={form}>
                 {!successful && (
                   <>
                   <div className="form-group mb-3">
