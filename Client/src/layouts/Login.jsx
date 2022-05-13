@@ -1,8 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
-import { Redirect } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -27,11 +26,8 @@ export default function SignIn(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
 
-  // const { user: currentUser } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state?.auth)
-  console.log("user:", user?.roles[0])
+  const { user } = useSelector((state) => state?.auth);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  console.log("isLoggedIn:", isLoggedIn)
   const { message } = useSelector((state) => state.message);
 
   const dispatch = useDispatch();
@@ -53,18 +49,20 @@ export default function SignIn(props) {
 
     form.current.validateAll();
 
+    // Loginnya berhasil sama authorizationnya tapi perlu di refresh dulu 
+    // Jadi kayak login pertama datanya kesimpen di localStorage tapi itu loading
+    // Lah kalau direfresh terus login lagi pakek akun yang sama itu bisa masuk
+    // Kalau akun user nanti menuju ke dashboar user, akun admin menuju ke dashboar admin
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(email, password))
         .then(() => {
-          if (user?.roles[0] == 'ROLE_USER') {
+          if (isLoggedIn && user?.roles[0] === 'ROLE_USER') {
             props.history.push("/dashboard-user");
             window.location.reload();
-          } else if (user?.roles[0] == 'ROLE_ADMIN') {
+          } else if (isLoggedIn && user?.roles[0] === 'ROLE_ADMIN') {
             props.history.push("/dashboard-admin");
             window.location.reload();
           }
-          // props.history.push("/");
-          // window.location.reload();
         })
         .catch(() => {
           setLoading(false);
@@ -72,30 +70,7 @@ export default function SignIn(props) {
     } else {
       setLoading(false);
     }
-
-    // if (currentUser.roles.includes("ROLE_ADMIN")) {
-    //   return <Redirect to="/dashboard-admin" />
-    // } else {
-    //   return <Redirect to="/dashboard-user" />
-    // }
   };
-
-  // useEffect(() => {
-  //   if (isLoggedIn === false) {
-  //     window.location.reload();
-  //   }
-  // }, [isLoggedIn]);
-
-  // useEffect(() => {  
-  //   if (isLoggedIn && user?.roles === ['ROLE_USER']) {
-  //     console.log("user")
-  //     return <Redirect to="/dashboard-user" />
-  //   } else if (isLoggedIn && user?.roles === ['ROLE_ADMIN']) {
-  //     console.log("admin")
-  //     return <Redirect to="/dashboard-admin" />
-  //   }
-  // }, [isLoggedIn])
-
 
   const responseGoogle = (response) => {
     console.log(response);
@@ -111,7 +86,7 @@ export default function SignIn(props) {
           <div className="p-4 row align-items-center custom-auth-point">
             <div className="col-md-12">
               <div className="mb-4 custom-auth-logo"></div>
-              <h4 className="font-weight-bold mb-4">Welcome BCR</h4>
+              <h4 className="font-weight-bold mb-4">Welcome To BCR</h4>
               <Form onSubmit={handleLogin} ref={form}>
                 <div className="form-group mb-3">
                   <label
