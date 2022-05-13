@@ -68,7 +68,7 @@ export default function SignUp() {
   const onChangeUsername = (element) => {
     const username = element.target.value;
     setUsername(username);
-  }
+  };
 
   const onChangeEmail = (element) => {
     const email = element.target.value;
@@ -113,7 +113,7 @@ export default function SignUp() {
               <Form onSubmit={handleRegister} ref={form}>
                 {!successful && (
                   <>
-                  <div className="form-group mb-3">
+                    <div className="form-group mb-3">
                       <label
                         htmlFor="username"
                         className="text-dark mb-1 custom-auth-font"
@@ -171,7 +171,7 @@ export default function SignUp() {
                       Sign Up
                     </button>
                     <p className="text-center text-dark custom-auth-font">
-                      Already have an account ? &nbsp; 
+                      Already have an account ? &nbsp;
                       <span>
                         <Link to={"/login"} className="text-primary">
                           Login
@@ -192,6 +192,13 @@ export default function SignUp() {
                       role="alert"
                     >
                       {message}
+                      <p className="mx-auto text-dark custom-auth-font">
+                        Please go to the{" "}
+                        <Link className="text-primary" to={"/login"}>
+                          Login
+                        </Link>{" "}
+                        page
+                      </p>
                     </div>
                   </div>
                 )}

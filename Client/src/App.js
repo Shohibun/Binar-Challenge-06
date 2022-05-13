@@ -1,7 +1,8 @@
 import "./App.css";
 import React from "react";
 import $ from "jquery";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Router, Switch } from "react-router-dom";
+import { history } from "./helpers/history";
 import Register from "./layouts/Register";
 import Login from "./layouts/Login";
 import LandingPage from "./layouts/LandingPage";
@@ -125,21 +126,36 @@ class App extends React.Component {
   }
 
   render() {
-    
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route path={"/"} element={<LandingPage />} />
-          <Route path={"/register"} element={<Register />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/dasboard-user"} element={<DashboardUser />} />
-          <Route path={"/hasil-pencarian-user/:tipe"} element={<HasilPencarianUser />} />
-          <Route path={"/detail-paket-user/:id"} element={<DetailPaketUser />} />
-          <Route path={"/dashboard-admin"} element={<DashboardAdmin />} />
-          <Route path={"/list-car-admin"} element={<ListCarAdmin />} />
-          <Route path={"/add-new-car-admin"} element={<AddNewCarAdmin />} />
-        </Routes>
-      </BrowserRouter>
+      <Router history={history}>
+        {/* <Router history={history}> */}
+        <>
+          <Switch>
+            <Route exact path={"/"} component={LandingPage} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path={"/login"} component={Login} />
+            <Route exact path={"/dasboard-user"} component={DashboardUser} />
+            <Route
+              exact
+              path={"/hasil-pencarian-user/:tipe"}
+              component={HasilPencarianUser}
+            />
+            <Route
+              exact
+              path={"/detail-paket-user/:id"}
+              component={DetailPaketUser}
+            />
+            <Route exact path={"/dashboard-admin"} component={DashboardAdmin} />
+            <Route exact path={"/list-car-admin"} component={ListCarAdmin} />
+            <Route
+              exact
+              path={"/add-new-car-admin"}
+              component={AddNewCarAdmin}
+            />
+          </Switch>
+        </>
+        {/* </Router> */}
+      </Router>
     );
   }
 }
