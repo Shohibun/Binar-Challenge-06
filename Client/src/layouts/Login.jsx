@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
@@ -27,7 +27,11 @@ export default function SignIn(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
 
+  // const { user: currentUser } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.auth)
+  console.log("user:", user?.roles[0])
   const { isLoggedIn } = useSelector((state) => state.auth);
+  console.log("isLoggedIn:", isLoggedIn)
   const { message } = useSelector((state) => state.message);
 
   const dispatch = useDispatch();
@@ -52,8 +56,15 @@ export default function SignIn(props) {
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(email, password))
         .then(() => {
-          props.history.push("/");
-          window.location.reload();
+          if (user?.roles[0] == 'ROLE_USER') {
+            props.history.push("/dashboard-user");
+            window.location.reload();
+          } else if (user?.roles[0] == 'ROLE_ADMIN') {
+            props.history.push("/dashboard-admin");
+            window.location.reload();
+          }
+          // props.history.push("/");
+          // window.location.reload();
         })
         .catch(() => {
           setLoading(false);
@@ -61,11 +72,30 @@ export default function SignIn(props) {
     } else {
       setLoading(false);
     }
+
+    // if (currentUser.roles.includes("ROLE_ADMIN")) {
+    //   return <Redirect to="/dashboard-admin" />
+    // } else {
+    //   return <Redirect to="/dashboard-user" />
+    // }
   };
 
-  if (isLoggedIn) {
-    return <Redirect to="/dasboard-user" />;
-  }
+  // useEffect(() => {
+  //   if (isLoggedIn === false) {
+  //     window.location.reload();
+  //   }
+  // }, [isLoggedIn]);
+
+  // useEffect(() => {  
+  //   if (isLoggedIn && user?.roles === ['ROLE_USER']) {
+  //     console.log("user")
+  //     return <Redirect to="/dashboard-user" />
+  //   } else if (isLoggedIn && user?.roles === ['ROLE_ADMIN']) {
+  //     console.log("admin")
+  //     return <Redirect to="/dashboard-admin" />
+  //   }
+  // }, [isLoggedIn])
+
 
   const responseGoogle = (response) => {
     console.log(response);
@@ -81,7 +111,7 @@ export default function SignIn(props) {
           <div className="p-4 row align-items-center custom-auth-point">
             <div className="col-md-12">
               <div className="mb-4 custom-auth-logo"></div>
-              <h4 className="font-weight-bold mb-4">Welcome, Admin BCR</h4>
+              <h4 className="font-weight-bold mb-4">Welcome BCR</h4>
               <Form onSubmit={handleLogin} ref={form}>
                 <div className="form-group mb-3">
                   <label
@@ -132,6 +162,7 @@ export default function SignIn(props) {
                 <p className="text-center mt-1">
                   <GoogleLogin
                     clientId="512358058842-irha8guanrdttm8fjc7mpvhmjlbjg23t.apps.googleusercontent.com"
+                    clientSecret="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"
                     buttonText="Login With Google"
                     onSucces={responseGoogle}
                     onFailure={responseGoogle}

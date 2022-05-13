@@ -128,13 +128,12 @@ class App extends React.Component {
   render() {
     return (
       <Router history={history}>
-        {/* <Router history={history}> */}
         <>
           <Switch>
             <Route exact path={"/"} component={LandingPage} />
-            <Route exact path="/register" component={Register} />
+            <Route exact path={"/register"} component={Register} />
             <Route exact path={"/login"} component={Login} />
-            <Route exact path={"/dasboard-user"} component={DashboardUser} />
+            <Route exact path={"/dashboard-user"} component={DashboardUser} />
             <Route
               exact
               path={"/hasil-pencarian-user/:tipe"}
@@ -154,7 +153,6 @@ class App extends React.Component {
             />
           </Switch>
         </>
-        {/* </Router> */}
       </Router>
     );
   }

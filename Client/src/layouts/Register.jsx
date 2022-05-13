@@ -173,9 +173,9 @@ export default function SignUp() {
                     <p className="text-center text-dark custom-auth-font">
                       Already have an account ? &nbsp;
                       <span>
-                        <Link to={"/login"} className="text-primary">
+                        <a href="/login" className="text-primary">
                           Login
-                        </Link>
+                        </a>
                       </span>
                     </p>
                   </>
