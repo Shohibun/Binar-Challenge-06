@@ -1,8 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../actions/auth";
+import EventBus from "../common/EventBus";
 
 export default function NavbarUser() {
+  const dispatch = useDispatch();
+
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  useEffect(() => {
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, [logOut]);
+
   return (
     <nav className="navbar navbar-expand-sm fixed-top navbar-light">
       <div className="container">
@@ -32,7 +51,7 @@ export default function NavbarUser() {
             <a className="nav-item nav-link ml-2 pl-3 pr-3 custom-user-cursor" id="faq">
               FAQ
             </a>
-            <a className="nav-item nav-link ml-3 bg-success text-white font-weight-bold rounded pl-3 pr-3 custom-custom-user-cursor" href="/">
+            <a className="nav-item nav-link ml-3 bg-success text-white font-weight-bold rounded pl-3 pr-3 custom-custom-user-cursor" href="/" onClick={logOut}>
               Logout
             </a>
           </div>
