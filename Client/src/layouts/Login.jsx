@@ -49,17 +49,13 @@ export default function SignIn(props) {
 
     form.current.validateAll();
 
-    // Loginnya berhasil sama authorizationnya tapi perlu di refresh dulu 
-    // Jadi kayak login pertama datanya kesimpen di localStorage tapi itu loading
-    // Lah kalau direfresh terus login lagi pakek akun yang sama itu bisa masuk
-    // Kalau akun user nanti menuju ke dashboar user, akun admin menuju ke dashboar admin
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(email, password))
         .then(() => {
-          if (isLoggedIn && user?.roles[0] === 'ROLE_USER') {
+          if (user?.roles[0] === 'ROLE_USER') {
             props.history.push("/dashboard-user");
             window.location.reload();
-          } else if (isLoggedIn && user?.roles[0] === 'ROLE_ADMIN') {
+          } else if (user?.roles[0] === 'ROLE_ADMIN') {
             props.history.push("/dashboard-admin");
             window.location.reload();
           }
@@ -75,6 +71,14 @@ export default function SignIn(props) {
   const responseGoogle = (response) => {
     console.log(response);
   };
+
+  if (isLoggedIn) {
+    if (user?.roles[0] === 'ROLE_USER') {
+      return <Redirect to="/dashboard-user" />
+    } else if (user?.roles[0] === 'ROLE_ADMIN') {
+      return <Redirect to="/dashboard-admin" />
+    }
+  }
 
   return (
     <div className="container-fluid custom-auth-body">
@@ -152,7 +156,7 @@ export default function SignIn(props) {
                     </div>
                   </div>
                 )}
-                <CheckButton style={{ dispaly: "none" }} ref={checkBtn} />
+                <CheckButton style={{ display: "none" }} ref={checkBtn} />
               </Form>
             </div>
           </div>
